@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "563170651266",
+    "project_id": "chatwise-fb3b8",
+    "storage_bucket": "chatwise-fb3b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563170651266:android:6f7895f326c8752fbad89b",
+        "android_client_info": {
+          "package_name": "com.example.chatwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563170651266-0qv3hfi87ihtg21o07uhn56vumjgbnju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatwise",
+            "certificate_hash": "aad921403e8e5990228e7fed8eb1b140cc93c91d"
+          }
+        },
+        {
+          "client_id": "563170651266-q5g03rukrkrjve5ub7tb2h31s9mcoq3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB27ZmWU0CcmXOeFjEWKc8m3R-4AX0cfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563170651266-q5g03rukrkrjve5ub7tb2h31s9mcoq3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
