@@ -26,4 +26,14 @@ class UserSession {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return sf.getBool(userLoggedInKey);
   }
+
+  static Future<String?> getEmail() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(userEmailKey);
+  }
+
+  static Future<String?> getName() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(userNameKey);
+  }
 }

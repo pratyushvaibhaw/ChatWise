@@ -24,7 +24,7 @@ showSnackBar(BuildContext context, String msg, Color color) {
 }
 
 void nextPage(BuildContext context, String pagename) {
-  if (pagename == 'login' || pagename == 'signup') {
+  if (pagename == 'login' || pagename == 'signup' || pagename == 'home') {
     Navigator.pushReplacementNamed(context, pagename);
   } else {
     Navigator.pushNamed(context, pagename);

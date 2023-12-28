@@ -25,7 +25,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build splascreen');
     final colorProvider = Provider.of<ColorProvider>(context, listen: false);
     Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       colorProvider.setNum();

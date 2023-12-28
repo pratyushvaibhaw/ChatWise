@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:chatwise/providers/loading_provider.dart';
+import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/res/colors.dart';
 import 'package:chatwise/res/dimensions.dart';
 import 'package:chatwise/res/textstyle.dart';
@@ -43,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('rebuild');
     final loadingProvider =
         Provider.of<LoadingProvider>(context, listen: false);
     return Scaffold(
@@ -194,6 +194,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   loginUser(String email, String password) async {
+    final stringProvider = Provider.of<StringProvider>(context, listen: false);
+
     await _authService
         .loginUserWithEmailandPassword(context, email, password)
         .then((value) async {
@@ -206,7 +208,8 @@ class _LoginPageState extends State<LoginPage> {
         UserSession.saveUserLoggedInStatus(true);
         UserSession.saveUserName(snapshot.docs[0]['fullName']);
         UserSession.saveUserEmail(email);
-
+        stringProvider.setEmail(email);
+        stringProvider.setName(snapshot.docs[0]['fullName']);
         final loadingProvider =
             Provider.of<LoadingProvider>(context, listen: false);
         loadingProvider.setLoading(false);

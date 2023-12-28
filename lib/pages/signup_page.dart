@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chatwise/providers/loading_provider.dart';
+import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/res/colors.dart';
 import 'package:chatwise/res/dimensions.dart';
 import 'package:chatwise/res/textstyle.dart';
@@ -137,14 +138,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   //password
                   ValueListenableBuilder(
-                      valueListenable: _obscure,
+                      valueListenable: _obscure,                                                                            
                       builder: (context, obscure, _) {
                         return TextFormField(
                           validator: MultiValidator([
-                            MinLengthValidator(8,
-                                errorText: 'minimum length must be 8'),
                             RequiredValidator(
                                 errorText: 'password is required'),
+                            MinLengthValidator(8,
+                                errorText: 'minimum length must be 8'),
                           ]),
                           obscureText: obscure,
                           style: googleaBeeZee(grey, twelve, FontWeight.w600,
@@ -228,6 +229,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   regiesterUser(String fullName, String email, String password) async {
+    final stringProvider = Provider.of<StringProvider>(context, listen: false);
     await _authService
         .regiesterUserWithEmailandPassword(context, fullName, email, password)
         .then((value) {
@@ -236,6 +238,8 @@ class _SignUpPageState extends State<SignUpPage> {
         UserSession.saveUserLoggedInStatus(true);
         UserSession.saveUserName(fullName);
         UserSession.saveUserEmail(email);
+        stringProvider.setEmail(email);
+        stringProvider.setName(fullName);
         final loadingProvider =
             Provider.of<LoadingProvider>(context, listen: false);
         loadingProvider.setLoading(false);

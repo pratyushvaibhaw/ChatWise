@@ -1,10 +1,12 @@
 import 'package:chatwise/pages/home_page.dart';
 import 'package:chatwise/pages/login_page.dart';
+import 'package:chatwise/pages/profile_page.dart';
 import 'package:chatwise/pages/signup_page.dart';
 import 'package:chatwise/pages/splash_page.dart';
 import 'package:chatwise/providers/auth_provider.dart';
 import 'package:chatwise/providers/color_provider.dart';
 import 'package:chatwise/providers/loading_provider.dart';
+import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,18 +34,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ColorProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
+        ChangeNotifierProvider(create: (_) => StringProvider()),
       ],
       child: MaterialApp(
-        
         initialRoute: 'splash',
         routes: {
           'home': (context) => const HomePage(),
           'splash': (context) => const SplashPage(),
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUpPage(),
+          'profile': (context) => const ProfilePage()
         },
         title: 'Flutter Demo',
         theme: ThemeData(
+          highlightColor: oranget2,
+          splashColor: oranget2,
           iconTheme: IconThemeData(color: oranget1),
           scaffoldBackgroundColor: white,
         ),
