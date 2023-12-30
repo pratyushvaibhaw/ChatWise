@@ -6,11 +6,11 @@ import 'package:chatwise/services/auths/auth_service.dart';
 import 'package:chatwise/services/auths/user_session.dart';
 import 'package:chatwise/services/database_service.dart';
 import 'package:chatwise/widgets/create_group_dialog.dart';
+import 'package:chatwise/widgets/group_tile.dart';
 import 'package:chatwise/widgets/noGroupWidget.dart';
 
 import 'package:chatwise/widgets/user_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   final AuthService _authService = AuthService();
 
   Stream? groups;
+  @override
   void initState() {
     super.initState();
     getUserData();
@@ -38,10 +39,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  String getId(String s) {
+    return s.substring(0, s.indexOf('_'));
+  }
+
+  String getName(String s) {
+    return s.substring(s.indexOf('_') + 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     setNameEmail();
-
     return Scaffold(
       endDrawer: UserDrawer(authService: _authService),
       appBar: AppBar(
@@ -57,6 +65,7 @@ class _HomePageState extends State<HomePage> {
           ],
           leading: Builder(builder: (context) {
             return IconButton(
+                color: bluet2,
                 onPressed: () {
                   Scaffold.of(context).openEndDrawer();
                 },
@@ -85,7 +94,6 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           createGroupDialog(
             context,
-            () {},
           );
         },
         child: Icon(
@@ -97,6 +105,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   groupStream() {
+    final stringProvider = Provider.of<StringProvider>(context, listen: false);
+
     return StreamBuilder(
         stream: groups,
         builder: ((context, AsyncSnapshot snapshot) {
@@ -105,29 +115,21 @@ class _HomePageState extends State<HomePage> {
                 snapshot.data['groups'].length != 0) {
               var data = snapshot.data['groups'];
               return ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: ((context, index) {
+                  int reverseIndex = data.length - 1 - index;
                   return Container(
-                    height: 75,
-                    margin: const EdgeInsets.only(top: 2, bottom: 2),
-                    child: ListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      tileColor: oranget2,
-                      leading: CircleAvatar(
-                        foregroundColor: bluet2,
-                        backgroundColor: white,
-                        child: Center(
-                            child: Text(
-                          data[index].toString().substring(0, 1),
-                          style: googleaBeeZee(bluet2, 16, FontWeight.w300),
-                        )),
-                      ),
-                      title: Text(
-                        data[index].toString(),
-                        style: googleaBeeZee(bluet2, 18, FontWeight.w300,
-                            spacing: 0),
-                      ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 2,
                     ),
+                    height: 75,
+                    margin: const EdgeInsets.only(top: 1, bottom: 1),
+                    child: GroupTile(
+                        groupId: getId(
+                          data[reverseIndex].toString(),
+                        ),
+                        groupName: getName(data[reverseIndex].toString()),
+                        userName: stringProvider.name),
                   );
                 }),
                 itemCount: snapshot.data['groups'].length,

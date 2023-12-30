@@ -1,3 +1,4 @@
+import 'package:chatwise/pages/chat_page.dart';
 import 'package:chatwise/pages/home_page.dart';
 import 'package:chatwise/pages/login_page.dart';
 import 'package:chatwise/pages/profile_page.dart';
@@ -37,16 +38,22 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StringProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: 'splash',
         routes: {
           'home': (context) => const HomePage(),
           'splash': (context) => const SplashPage(),
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUpPage(),
-          'profile': (context) => const ProfilePage()
+          'profile': (context) => const ProfilePage(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            backgroundColor: oranget1,
+            elevation: 0,
+            toolbarHeight: 70,
+          ),
           highlightColor: oranget2,
           splashColor: oranget2,
           iconTheme: IconThemeData(color: oranget1),

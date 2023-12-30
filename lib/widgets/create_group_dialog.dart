@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 createGroupDialog(
   BuildContext context,
-  VoidCallback yes,
+  
 ) {
   final gnameController = TextEditingController();
   final formKey = GlobalKey<FormState>();

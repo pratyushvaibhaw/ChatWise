@@ -1,4 +1,5 @@
 import 'package:chatwise/providers/loading_provider.dart';
+import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class DataBaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
   final CollectionReference groupCollection =
-      FirebaseFirestore.instance.collection('group');
+      FirebaseFirestore.instance.collection('groups');
 
   Future savingUserDate(String fullname, String email, String photourl) async {
     return userCollection.doc(uid).set({
@@ -38,7 +39,7 @@ class DataBaseService {
     }
   }
 
-  //fetching group details
+  //fetching groups user has joined
   getUserGroup() async {
     return userCollection.doc(uid).snapshots();
   }
@@ -54,7 +55,7 @@ class DataBaseService {
     });
     //for updating members of the group
     await groupdocumentReference.update({
-      'members': FieldValue.arrayUnion(['${uid}_d$userName']),
+      'members': FieldValue.arrayUnion(['${uid}_$userName']),
       'groupId': groupdocumentReference.id
     });
     //for updating the group at user's end
@@ -63,5 +64,26 @@ class DataBaseService {
       'groups':
           FieldValue.arrayUnion(['${groupdocumentReference.id}_$groupName'])
     });
+  }
+
+//getting group admin
+  Future getGroupAdmin(String groupId) async {
+    DocumentReference d = groupCollection.doc(groupId);
+    DocumentSnapshot documentSnapshot = await d.get();
+    return documentSnapshot['admin'].toString();
+  }
+
+  //getting chat
+  getChat(String groupId) async {
+    return groupCollection
+        .doc(groupId)
+        .collection('chat_threads')
+        .orderBy('time')
+        .snapshots();
+  }
+
+//fetching all members
+  getGroupMembers(String groupId) async {
+    return groupCollection.doc(groupId).snapshots();
   }
 }
