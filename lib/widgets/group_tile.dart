@@ -60,6 +60,7 @@ class _GroupTileState extends State<GroupTile> {
           child: Center(
               child: Text(
             groupIconString(widget.groupName),
+            
             style: googleaBeeZee(white, 16, FontWeight.bold),
           )),
         ),

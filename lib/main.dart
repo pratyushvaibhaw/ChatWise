@@ -2,6 +2,7 @@ import 'package:chatwise/pages/chat_page.dart';
 import 'package:chatwise/pages/home_page.dart';
 import 'package:chatwise/pages/login_page.dart';
 import 'package:chatwise/pages/profile_page.dart';
+import 'package:chatwise/pages/search_page.dart';
 import 'package:chatwise/pages/signup_page.dart';
 import 'package:chatwise/pages/splash_page.dart';
 import 'package:chatwise/providers/auth_provider.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUpPage(),
           'profile': (context) => const ProfilePage(),
+          'search': (context) => const SearchPage(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(

@@ -5,6 +5,7 @@ import 'package:chatwise/res/textstyle.dart';
 import 'package:chatwise/services/auths/auth_service.dart';
 import 'package:chatwise/services/auths/user_session.dart';
 import 'package:chatwise/services/database_service.dart';
+import 'package:chatwise/utils/utils.dart';
 import 'package:chatwise/widgets/create_group_dialog.dart';
 import 'package:chatwise/widgets/group_tile.dart';
 import 'package:chatwise/widgets/noGroupWidget.dart';
@@ -57,7 +58,9 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(twelve * .5)),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  nextPage(context, 'search');
+                },
                 icon: Icon(
                   Icons.search_rounded,
                   size: twelve * 2.5,

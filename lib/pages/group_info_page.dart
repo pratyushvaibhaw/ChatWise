@@ -2,6 +2,7 @@ import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/res/colors.dart';
 import 'package:chatwise/res/textstyle.dart';
 import 'package:chatwise/services/database_service.dart';
+import 'package:chatwise/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,19 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 25),
                           child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                DataBaseService(
+                                        uid: FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                    .exitGroup(
+                                        snapshot.data['groupId'],
+                                        stringProvider.name,
+                                        snapshot.data['groupName']);
+                                showSnackBar(context, 'Exited group', oranget1);
+                                Future.delayed(const Duration(seconds: 2), () {
+                                  nextPage(context, 'home');
+                                });
+                              },
                               icon: const Icon(Icons.exit_to_app_sharp)),
                         )
                       ],
