@@ -1,5 +1,4 @@
 import 'package:chatwise/providers/loading_provider.dart';
-import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +51,9 @@ class DataBaseService {
       'admin': '${id}_$userName',
       'members': [],
       'groupId': '',
+      'recentMessageTime': '',
+      'recentMessageSender': '',
+      'recentMessage': ''
     });
     //for updating members of the group
     await groupdocumentReference.update({
@@ -131,5 +133,18 @@ class DataBaseService {
         'members': FieldValue.arrayUnion(['${uid}_$userName'])
       });
     }
+  }
+
+  //sending message
+  sendMessage(String groupId, Map<String, dynamic> chatMessageData) {
+    groupCollection
+        .doc(groupId)
+        .collection('chat_threads')
+        .add(chatMessageData);
+    groupCollection.doc(groupId).update({
+      'recentMessage': chatMessageData['message'],
+      'recentMessageSender': chatMessageData['sender'],
+      'recentMessageTime': chatMessageData['time'].toString()
+    });
   }
 }

@@ -1,8 +1,5 @@
 import 'package:chatwise/pages/chat_page.dart';
 import 'package:chatwise/providers/string_provider.dart';
-import 'package:chatwise/providers/string_provider.dart';
-import 'package:chatwise/providers/string_provider.dart';
-import 'package:chatwise/providers/string_provider.dart';
 import 'package:chatwise/res/colors.dart';
 import 'package:chatwise/res/textstyle.dart';
 import 'package:chatwise/services/database_service.dart';

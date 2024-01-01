@@ -3,7 +3,7 @@ import 'package:chatwise/res/dimensions.dart';
 import 'package:chatwise/res/textstyle.dart';
 import 'package:flutter/material.dart';
 
-logOutDialog(BuildContext context, VoidCallback yes) {
+askDialog(BuildContext context, VoidCallback yes,String title,) {
   return showDialog(
       context: context,
       builder: (context) {
@@ -15,7 +15,7 @@ logOutDialog(BuildContext context, VoidCallback yes) {
           actionsPadding: EdgeInsets.all(ten),
           actionsAlignment: MainAxisAlignment.spaceEvenly,
           title: Text(
-            'Sign Out',
+            title,
             style: googleaBeeZee(bluet2, ten * 2, FontWeight.bold, spacing: .5),
           ),
           content: Text('Are you sure?',

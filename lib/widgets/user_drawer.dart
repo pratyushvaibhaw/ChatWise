@@ -4,7 +4,7 @@ import 'package:chatwise/res/dimensions.dart';
 import 'package:chatwise/res/textstyle.dart';
 import 'package:chatwise/services/auths/auth_service.dart';
 import 'package:chatwise/utils/utils.dart';
-import 'package:chatwise/widgets/log_out_dialog.dart';
+import 'package:chatwise/widgets/ask_dialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -103,11 +103,11 @@ class UserDrawer extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(twelve)),
                 onTap: () {
-                  logOutDialog(context, () {
+                  askDialog(context, () {
                     _authService.signout().then((value) {
                       nextPage(context, 'login');
                     });
-                  });
+                  }, 'Sign Out');
                 },
                 leading: Icon(
                   Icons.logout_rounded,

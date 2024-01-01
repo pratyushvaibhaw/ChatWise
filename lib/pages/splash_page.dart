@@ -55,7 +55,7 @@ class _SplashPageState extends State<SplashPage> {
             const SizedBox(
               height: 30,
             ),
-           const Round_Boxex()
+          const Round_Boxex()
           ],
         ),
       ),

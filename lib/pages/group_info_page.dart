@@ -3,6 +3,7 @@ import 'package:chatwise/res/colors.dart';
 import 'package:chatwise/res/textstyle.dart';
 import 'package:chatwise/services/database_service.dart';
 import 'package:chatwise/utils/utils.dart';
+import 'package:chatwise/widgets/ask_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +68,16 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
             if (snapshot.data['members'] != null &&
                 snapshot.data['members'] != 0) {
               var memberdata = snapshot.data['members'];
+              groupExit() {
+                DataBaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+                    .exitGroup(snapshot.data['groupId'], stringProvider.name,
+                        snapshot.data['groupName']);
+                showSnackBar(context, 'Exited group', oranget1);
+                Future.delayed(const Duration(seconds: 2), () {
+                  nextPage(context, 'home');
+                });
+              }
+
               return CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [
@@ -76,20 +87,10 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
                           padding: const EdgeInsets.only(bottom: 25),
                           child: IconButton(
                               onPressed: () {
-                                DataBaseService(
-                                        uid: FirebaseAuth
-                                            .instance.currentUser!.uid)
-                                    .exitGroup(
-                                        snapshot.data['groupId'],
-                                        stringProvider.name,
-                                        snapshot.data['groupName']);
-                                showSnackBar(context, 'Exited group', oranget1);
-                                Future.delayed(const Duration(seconds: 2), () {
-                                  nextPage(context, 'home');
-                                });
+                                askDialog(context, groupExit, 'Exit Group');
                               },
-                              icon: const Icon(Icons.exit_to_app_sharp)),
-                        )
+                              icon: const Icon(Icons.exit_to_app_rounded)),
+                        ),
                       ],
                       title: CircleAvatar(
                           backgroundColor: bluet2,
